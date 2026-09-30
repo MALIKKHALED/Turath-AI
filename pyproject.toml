@@ -1,0 +1,28 @@
+[project]
+name = "turath-ai"
+version = "0.1.0"
+description = "Turath AI — Arabic-first RAG assistant for Islamic history and Seerah"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115",            # API framework
+    "uvicorn>=0.30",             # ASGI server
+    "pydantic-settings>=2.5",    # config via .env
+    "python-dotenv>=1.0",        # local .env loading
+    "langchain>=0.3",            # RAG orchestration
+    "langchain-community>=0.3",  # FAISS + HF integrations
+    "langchain-huggingface>=0.1",# HF embeddings / LLMs
+    "faiss-cpu>=1.8",            # vector store (local, no server)
+    "sentence-transformers>=3.0",# embedding models from HF
+    "httpx>=0.27",               # needed by FastAPI TestClient
+    "pytest>=8.0",               # testing
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["app*"]

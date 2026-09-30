@@ -216,3 +216,14 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Turath-AI: data + vector indexes (large / regenerable, never commit)
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+*.faiss
+*.pkl
+
+# HuggingFace cache (large model files, re-downloadable)
+.cache/
