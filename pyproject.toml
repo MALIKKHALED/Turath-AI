@@ -2,7 +2,7 @@
 name = "turath-ai"
 version = "0.1.0"
 description = "Turath AI — Arabic-first RAG assistant for Islamic history and Seerah"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 dependencies = [
     "fastapi>=0.115",            # API framework
     "uvicorn>=0.30",             # ASGI server
