@@ -7,7 +7,7 @@ class Settings(BaseSettings):
 
     # HuggingFace (embeddings now, LLM later)
     hf_token: str = ""
-    embedding_model: str = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+    embedding_model: str = "BAAI/bge-m3"
 
     # Paths
     data_raw_dir: str = "data/raw"
