@@ -26,5 +26,17 @@ class Settings(BaseSettings):
     # Retrieval
     retriever_k: int = 5
 
+        # Build device (indexing side only; serving always CPU)
+    device: str = "cpu"  # flip to "cuda" for GPU index builds
+    use_fp16: bool = False  # True with cuda on 4GB cards (halves VRAM)
+    embed_batch_size: int = 1000  # progress print per batch
+
+    # Versioned index + hybrid retrieval
+    index_dir: str = "data/processed/faiss_index"
+    use_bm25: bool = True  # kill-switch: False = dense-only
+    rrf_k: int = 60  # reciprocal-rank-fusion constant
+
+    processed_dir: str = "data/processed"  # chunks source (index_dir holds built artifacts)
+
 
 settings = Settings()

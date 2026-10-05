@@ -3,7 +3,7 @@ from pathlib import Path
 from langchain_core.documents import Document
 from langchain_core.embeddings import Embeddings
 
-from app.rag.index import build_index, load_chunks
+from app.rag.index import build_index, load_chunks, enriched_text
 
 
 class _StubEmbeddings(Embeddings):
@@ -34,3 +34,8 @@ def test_load_chunks_reads_jsonl(tmp_path):
                  '"heading": "باب", "index": 0}\n', encoding="utf-8")
     docs = load_chunks(tmp_path)
     assert len(docs) == 1 and docs[0].metadata["heading"] == "باب"
+
+
+def test_enriched_prefix_format():
+    assert enriched_text("S", "باب", "نص") == "[S | باب]\nنص"
+    assert enriched_text("S", "", "نص") == "[S]\nنص"

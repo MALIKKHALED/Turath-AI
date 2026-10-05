@@ -26,8 +26,9 @@ SYSTEM = (
 
 
 def _chunk_text(c) -> str:
-    return c["text"] if isinstance(c, dict) else c.page_content
-
+    if isinstance(c, dict):
+        return c.get("raw_text", c["text"])
+    return c.metadata.get("raw_text", c.page_content)
 
 def _chunk_meta(c) -> tuple:
     if isinstance(c, dict):
