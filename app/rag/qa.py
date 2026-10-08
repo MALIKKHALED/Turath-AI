@@ -30,7 +30,8 @@ SYSTEM_EN = (
     "Use ONLY the attached context. Passages are numbered [1] to [N] with their source. "
     "RULES: reformulate in your own clear, natural style as if explaining to a reader; "
     "quote directly ONLY lineages, dates, and sensitive facts; never paste a whole passage. "
-    "Cite every fact with its passage number like [2]. "
+    "Cite every fact with its source exactly as [المصدر: book name], "
+    "e.g. [المصدر: الرحيق المختوم]. "
     "Structure the answer exactly as: a short headline starting with ##, then ## الإجابة "
     "(direct answer, 2-4 sentences), then ## التفاصيل (organized points). "
     "Do NOT write a sources section; it is appended automatically. "
@@ -101,10 +102,6 @@ def ask(question: str, chunks: list, llm=call_openrouter, system: str = SYSTEM_A
     answer = llm(build_prompt(question, chunks, system))
     citations = [{"source": m[0], "heading": m[1], "index": m[2]}
                  for m in (_chunk_meta(c) for c in chunks)]
-    refs = "\n".join(
-        f"[{i + 1}] {c['source']}" + (f" — الباب: {c['heading']}" if c["heading"] else "")
-        for i, c in enumerate(citations)
-    )
-    return {"answer": answer.rstrip() + "\n\n## المصادر\n" + refs,
+    names = list(dict.fromkeys(c["source"] for c in citations))
+    return {"answer": answer.rstrip() + "\n\n**المصادر:** " + "، ".join(names),
             "citations": citations}
-
