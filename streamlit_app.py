@@ -16,9 +16,6 @@ BACKEND = os.environ.get("TURATH_API_URL", "http://127.0.0.1:8000")
 
 st.set_page_config(page_title="تراث AI", page_icon="📜", layout="wide")
 
-import base64
-from pathlib import Path
-
 def _bg_css() -> str:
     p = Path("assets/bg.png")
     if not p.exists():
